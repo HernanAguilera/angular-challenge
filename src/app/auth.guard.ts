@@ -7,10 +7,8 @@ export const productsGuard: CanActivateFn = (route, state) => {
   const token = localStorage.getItem('token');
 
   if (token) {
-    // Si el token existe, permitir el acceso
     return true;
   } else {
-    // Si no hay token, redirigir al login
     router.navigate(['/login']);
     return false;
   }
