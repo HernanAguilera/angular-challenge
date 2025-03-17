@@ -1,0 +1,61 @@
+<div *ngIf="loading" class="loading-overlay">
+  <div class="spinner"></div>
+</div>
+
+<div *ngIf="!loading">
+  <h2>Lista de Productos</h2>
+  <div class="filter-container">
+    <label for="category">Filtrar por Categoría:</label>
+    <select
+      id="category"
+      [(ngModel)]="selectedCategory"
+      (change)="onCategoryChange()"
+    >
+      <option value="">Todas</option>
+      <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+    </select>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Precio</th>
+        <th>Categoría</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let product of paginatedProducts"
+        (click)="openProductDetail(product)"
+        style="cursor: pointer"
+      >
+        <td>{{ product.id }}</td>
+        <td>{{ product.title }}</td>
+        <td>{{ product.price | currency }}</td>
+        <td>{{ product.category }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <button (click)="prevPage()" [disabled]="currentPage === 0">
+      Anterior
+    </button>
+    <button
+      (click)="nextPage()"
+      [disabled]="(currentPage + 1) * pageSize >= filteredProducts.length"
+    >
+      Siguiente
+    </button>
+  </div>
+</div>
+
+<button
+  mat-fab
+  class="floating-logout"
+  (click)="onLogout()"
+  aria-label="Cerrar sesión"
+  title="Cerrar sesión"
+>
+  <mat-icon>exit_to_app</mat-icon>
+</button>
