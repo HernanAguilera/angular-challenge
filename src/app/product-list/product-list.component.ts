@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  // ChangeDetectorRef,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService, Product } from '../services/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductComponent } from '../product/product.component';
@@ -44,25 +40,18 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    setTimeout(() => {
-      this.productService
-        .getProducts()
-        .subscribe((data) => {
-          console.log('service has returned data', data);
-          this.products = data;
-          // this.categories = [''].concat([...new Set(data.map((p) => p.category))]);
-          this.categories = [...new Set(data.map((p) => p.category))];
-
-          // this.selectedCategory = this.categories[0];
-          console.log({ selectedCategory: this.selectedCategory });
-
-          this.applyFilter();
-          // this.cdr.markForCheck();
-        })
-        .add(() => {
-          this.loading = false;
-        });
-    }, 2000);
+    this.productService
+      .getProducts()
+      .subscribe((data) => {
+        console.log('service has returned data', data);
+        this.products = data;
+        this.categories = [...new Set(data.map((p) => p.category))];
+        console.log({ selectedCategory: this.selectedCategory });
+        this.applyFilter();
+      })
+      .add(() => {
+        this.loading = false;
+      });
   }
 
   applyFilter(): void {
