@@ -1,0 +1,25 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: rgb(51, 59, 63);
+    color: white;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.error-message {
+    color: #f44336;
+    font-size: 0.875rem;
+    margin: 0.5rem 0;
+    text-align: center;
+}
